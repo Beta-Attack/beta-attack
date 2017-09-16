@@ -2,7 +2,6 @@
 const Horseman = require('node-horseman');
 const checklist = require('../checklist');
 
-
 const horseman = new Horseman();
 const { htmlList } = checklist;
 
