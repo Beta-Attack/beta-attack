@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "electron": "^1.7.6",
+    "jsdom": "^11.2.0",
     "node-horseman": "^3.3.0",
     "phantomjs": "^2.1.7",
     "prop-types": "^15.5.10",
