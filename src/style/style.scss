@@ -1,10 +1,150 @@
 /*********************
+  Variables
+*********************/
+$primary-font: "Libre Franklin", sans-serif;
+$secondary-font: "Gudea", sans-serif;
+
+/*********************
+  Mixins
+*********************/
+@mixin center-vertical($position) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@mixin center-horizontal($position) {
+  position: $position;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin center-center($position) {
+  position: $position;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/*********************
   Border box
 *********************/
-
 html {
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
+@font-face {
+  font-family: "Gudea";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/Gudea-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Libre Franklin";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/LibreFranklin-Medium.ttf") format("ttf");
+}
+
+/*********************
+  General
+*********************/
+body {
+  font-family: $primary-font;
+  min-width: 800px;
+  min-height: 600px;
+  width: 100%;
+  height: 100%;
+}
+#container, .main {
+  width: 100%;
+  height: 100%;
+}
+#container {
+  padding: 1%;
+  background-color: #A1A1A1;
+}
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  background-color: #EEEEEE;
+}
+
+/*********************
+  Font
+*********************/
+body, input, button {
+  font-family: $primary-font;
+  font-size: 1.4rem;
+}
+p {
+  font-family: $secondary-font;
+}
+
+/*********************
+  Header 
+*********************/
+header {
+  position: relative;
+  height: 8%;
+  width: 100%;
+  background-color: #CECECE;
+}
+nav {
+  @include center-center(relative);
+  display: inline-block;
+}
+
+/*********************
+  Main
+*********************/
+main {
+  // position: relative;
+  height: 92%;
+  padding: 1% 0;
+}
+//Gutter for components in main element
+
+/*********************
+  Pentest 
+*********************/
+.pentest {
+  height: 15%;
+  width: 100%;
+  background-color: #F7F7F7;
+}
+.url-field {
+  @include center-vertical(relative);
+}
+.url-field input, .url-field button {
+  vertical-align: top;
+}
+.url-field input, .url-field button {
+  height: 40px;
+}
+.url-field button {
+  width: 15%;
+  margin-left: 3.33%;
+}
+.url-field input {
+  width: 60%;
+}
+
+/*********************
+  Summary 
+*********************/
+.summary {
+  background-color: #F7F7F7;
+  margin-top: 1%;
+}
+
+/*********************
+  XSS
+*********************/
+
+/*********************
+  SQL
+*********************/

@@ -1,11 +1,16 @@
 import React from 'react';
 
-const Header = function () {
+import Button from './Button';
+
+function Header() {
   return (
     <header>
-      <h1>Beta-Attack</h1>
+      <nav>
+        <Button buttonName="Pentest" />
+        <Button buttonName="Library" />
+      </nav>
     </header>
   );
-};
+}
 
 export default Header;

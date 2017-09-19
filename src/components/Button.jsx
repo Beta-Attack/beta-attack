@@ -9,13 +9,13 @@ const defaultProps = {
   text: 'Button Component',
 };
 
-const Button = function (props) {
+function Button(props) {
   return (
     <button type="button">
       { props.buttonName }
     </button>
   );
-};
+}
 
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;

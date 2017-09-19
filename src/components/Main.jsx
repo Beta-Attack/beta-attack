@@ -1,12 +1,14 @@
 import React from 'react';
-import Input from './Input';
+import Pentest from './Pentest';
+import Summary from './Summary';
 
-const Main = function () {
+function Main() {
   return (
     <main>
-      <Input />
+      <Pentest />
+      <Summary />
     </main>
   );
-};
+}
 
 export default Main;
