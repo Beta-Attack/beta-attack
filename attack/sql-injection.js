@@ -9,6 +9,11 @@ const { config } = index;
 const PORT = config.url;
 const URI = `https://localhost:${PORT}`;
 
+<<<<<<< HEAD:attack/sql-injection.js
+=======
+const PORT = null
+const URI = `https://localhost:${PORT}`;
+>>>>>>> 7dcd3ae0cd365ea44f743c1e7c2b84835cf1a8df:tool/sql-injection.js
 // Browser Engines:
 // - Mozilla/5.0 (Windows NT 6.1; WOW64)
 // - AppleWebKit/537.36 (KHTML, like Gecko)
