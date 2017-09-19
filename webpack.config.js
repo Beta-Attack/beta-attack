@@ -29,6 +29,10 @@ module.exports = {
           name: './img/[name].[ext]',
         },
       },
+      {
+        test: /\.(woff|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'base64-font-loader',
+      },
     ],
   },
   plugins: [
