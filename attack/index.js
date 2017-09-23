@@ -28,9 +28,9 @@ const getForm = url =>
     });
   });
 
-attack.xssFormInput = async () => {
+attack.injectFormInput = async (url) => {
   const result = [];
-  const inputFields = await getForm(config.url);
+  const inputFields = await getForm(url);
   async function traverseInputs(i = inputFields.length - 1) {
     let index = i;
     if (index < 0) return;
@@ -45,5 +45,9 @@ attack.xssFormInput = async () => {
   await traverseInputs();
   return result;
 };
+
+// attack.injectFormInput(config.url).then((result) => {
+//   console.log('This is the result: ', result);
+// });
 
 module.exports = attack;
