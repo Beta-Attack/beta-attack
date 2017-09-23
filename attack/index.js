@@ -11,38 +11,39 @@ const getForm = url =>
   new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       if (error) reject(error);
-      resolve(body);
+      let form = null;
+      const formInputClass = [];
+      const dom = new JSDOM(body);
+      form = dom.window.document.getElementsByTagName('form');
+      for (let x = 0; x < form.length; x += 1) {
+        for (let i = 0; i < form[x].children.length; i += 1) {
+          const tempArr = [];
+          if (form[x].children[i].getAttribute('type') === 'text') {
+            tempArr.push(form[x].children[i].getAttribute('name'));
+            formInputClass.push(tempArr);
+          }
+        }
+      }
+      resolve(formInputClass);
     });
   });
 
 attack.xssFormInput = async () => {
-  let body = null;
-  let form = null;
-  const formClass = [];
-  const formInputClass = [];
-  let result = null;
-  body = await getForm(config.url);
-  const dom = new JSDOM(body);
-  form = dom.window.document.getElementsByTagName('form');
-  for (let x = 0; x < form.length; x += 1) {
-    formClass.push(form[x].getAttribute('class'));
+  const result = [];
+  const inputFields = await getForm(config.url);
+  async function traverseInputs(i = inputFields.length - 1) {
+    let index = i;
+    if (index < 0) return;
+    await xssInjection
+      .targetFormInput(xssScripts, inputFields[0])
+      .then((response) => {
+        result.push(...response);
+      });
+    index -= 1;
+    return traverseInputs(index);
   }
-  // for (let x = 0; x < formClass.length; x += 1) {
-  //   // const input = dom.window.document.getElementsByClassName(formClass[x]);
-  //   // console.log('This is the input: ', input);
-  //   // console.log('This is all the childNodes: ', input[0].childNodes.length);
-  // }
-  console.log('This is formInputClass: ', formInputClass);
-  await xssInjection
-    .targetFormInput(xssScripts, formClass)
-    .then((urls) => {
-      result = urls;
-    });
+  await traverseInputs();
   return result;
 };
-
-attack.xssFormInput().then((result) => {
-  console.log('This is the result: ', result);
-});
 
 module.exports = attack;
