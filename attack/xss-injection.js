@@ -1,34 +1,55 @@
 const Horseman = require('node-horseman');
 const jsdom = require('jsdom');
-const index = require('./index.js');
+const request = require('request');
+const config = require('./config.js');
 
-const horseman = new Horseman();
 const { JSDOM } = jsdom;
-const { config } = index;
 
-const PORT = config.url;
-const URI = `https://localhost:${PORT}`;
-
-// Browser Engines:
-// - Mozilla/5.0 (Windows NT 6.1; WOW64)
-// - AppleWebKit/537.36 (KHTML, like Gecko)
-// - Chrome/37.0.2062.120 Safari/537.36
 const xssInjection = {};
-xssInjection.targetA = () =>
-  horseman
-    .userAgent('Mozilla/5.0 Chrome/37.0.2062.120 AppleWebKit/537.36')
-    .open(URI)
-    .html()
-    .then((body) => {
-      const dom = new JSDOM(body);
-      const aTag = dom.window.document.getElementsByTagName('a');
-      console.log('***************This is a***************');
-      for (let x = 0; x < aTag.length; x += 1) {
-        console.log('This is a tag\'s link: ', aTag[x].getAttribute('href'));
-      }
-      console.log('****************************************************');
-    })
-    .close();
 
-horseman.close();
+xssInjection.targetFormInput = async function (script, inputs, idx = inputs.length - 1, result = []) {
+  // Exit if no form detected
+  if (inputs.length === 0) return 'No form found in the page.';
+  // Base case for exiting recursion
+  if (idx < 0) {
+    console.log('Hit the basecase');
+    return result;
+  }
+  const xssScript = script;
+  let inputsIndex = idx;
+  console.log('This is inputsIndex: ', inputsIndex);
+  // Recursively fills input with all the xss scripts
+  async function fillInput(s = xssScript.length - 1) {
+    console.log('Calling fillInput');
+    let length = s;
+    if (length < 0) return;
+    // Initia new user for phantomjs on every recursion
+    const horseman = new Horseman();
+    await horseman
+      .viewport(1024, 850)
+      .on('consoleMessage', (msg) => {
+        result.push(msg);
+      })
+      .userAgent('Mozilla/5.0 Chrome/37.0.2062.120 AppleWebKit/537.36')
+      // .open(URI)
+      .open(config.url)
+      .mouseEvent('click', 0.1, 0.1)
+      .mouseEvent('click', 1023.9, 0.1)
+      .mouseEvent('click', 0.1, 849.9)
+      .mouseEvent('click', 1023.9, 849.9)
+      // **** End ****
+      // .type('input', script[0])
+      .type('input', xssScript[length])
+      .keyboardEvent('keypress', 16777221)
+      .wait(500)
+      .close();
+    length -= 1;
+    console.log('Ending fillInput');
+    return fillInput(length);
+  }
+  await fillInput();
+  inputsIndex -= 1;
+  return this.targetFormInput(script, inputs, inputsIndex, result);
+};
+
 module.exports = xssInjection;

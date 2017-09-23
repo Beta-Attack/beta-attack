@@ -7,17 +7,19 @@
   "scripts": {
     "app": "./node_modules/.bin/electron .",
     "build": "./node_modules/.bin/webpack -w",
-    "phantom": "./node_modules/.bin/phantomjs"
+    "start": "node ./server/server.js"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "electron": "^1.7.6",
+    "express": "^4.15.4",
     "jsdom": "^11.2.0",
     "node-horseman": "^3.3.0",
     "phantomjs": "^2.1.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "request": "^2.81.0"
+    "request": "^2.82.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

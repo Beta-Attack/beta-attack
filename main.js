@@ -1,17 +1,21 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const url = require('url');
+// const path = require('path');
+// const url = require('url');
+const express = require('./server/server.js');
 
 let win;
 
 const createWindow = () => {
+  // express();
   win = new BrowserWindow({ width: 1280, height: 850 });
   // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
+  // win.loadURL(url.format({
+  //   pathname: path.join(__dirname, 'index.html'),
+  //   protocol: 'file:',
+  //   slashes: true,
+  // }));
+
+  win.loadURL('http://localhost:4321/');
 
   // Open the DevTools.
   win.webContents.openDevTools();
