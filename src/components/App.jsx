@@ -21,9 +21,8 @@ class App extends Component {
     console.log('This is the state: ', this.state);
   }
   send() {
-    axios.get('/attack')
+    axios.post('/attack', { url: this.state.url })
       .then((response) => {
-        this.setState({ message: response });
         console.log('This is the reponse: ', response);
       });
   }
