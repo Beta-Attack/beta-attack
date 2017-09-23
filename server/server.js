@@ -1,22 +1,28 @@
 const express = require('express');
 const path = require('path');
 const attack = require('../attack');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   console.log('hello');
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.get('/attack', (req, res) => {
+app.post('/attack', (req, res) => {
+  console.log('This is req.body', typeof req.body.url);
+  let url = null;
+  if (typeof req.body.url === 'string') url = req.body.url;
+  else res.end('Invalid Input');
   attack
-    .xssFormInput()
-    .then((result) => {
-      console.log('result in server: ', result);
-      res.send(result);
+    .injectFormInput(url)
+    .then((response) => {
+      console.log('response in server: ', response);
+      res.send(response);
     });
-  console.log('inside attack');
 });
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
