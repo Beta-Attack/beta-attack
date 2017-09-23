@@ -1,9 +1,5 @@
 const Horseman = require('node-horseman');
-const jsdom = require('jsdom');
-const request = require('request');
 const config = require('./config.js');
-
-const { JSDOM } = jsdom;
 
 const xssInjection = {};
 
@@ -12,17 +8,14 @@ xssInjection.targetFormInput = async function (script, inputs, idx = inputs.leng
   if (inputs.length === 0) return 'No form found in the page.';
   // Base case for exiting recursion
   if (idx < 0) {
-    console.log('Hit the basecase');
     return result;
   }
   const xssScript = script;
   let inputsIndex = idx;
-  console.log('This is inputsIndex: ', inputsIndex);
   // Recursively fills input with all the xss scripts
   async function fillInput(s = xssScript.length - 1) {
-    console.log('Calling fillInput');
-    let length = s;
-    if (length < 0) return;
+    let index = s;
+    if (index < 0) return;
     // Initia new user for phantomjs on every recursion
     const horseman = new Horseman();
     await horseman
@@ -39,13 +32,12 @@ xssInjection.targetFormInput = async function (script, inputs, idx = inputs.leng
       .mouseEvent('click', 1023.9, 849.9)
       // **** End ****
       // .type('input', script[0])
-      .type('input', xssScript[length])
+      .type(`input[name=${inputs[inputsIndex]}]`, xssScript[index])
       .keyboardEvent('keypress', 16777221)
       .wait(500)
       .close();
-    length -= 1;
-    console.log('Ending fillInput');
-    return fillInput(length);
+    index -= 1;
+    return fillInput(index);
   }
   await fillInput();
   inputsIndex -= 1;
