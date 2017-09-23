@@ -14,6 +14,7 @@ xssInjection.targetFormInput = async function (script, inputs, idx = inputs.leng
   let inputsIndex = idx;
   // Recursively fills input with all the xss scripts
   async function fillInput(s = xssScript.length - 1) {
+    console.log('+');
     let index = s;
     if (index < 0) return;
     // Initia new user for phantomjs on every recursion
@@ -21,7 +22,12 @@ xssInjection.targetFormInput = async function (script, inputs, idx = inputs.leng
     await horseman
       .viewport(1024, 850)
       .on('consoleMessage', (msg) => {
-        result.push(msg);
+        result.push({
+          script: xssScript[index],
+          attribute: 'name',
+          value: inputs[inputsIndex],
+          url: msg,
+        });
       })
       .userAgent('Mozilla/5.0 Chrome/37.0.2062.120 AppleWebKit/537.36')
       // .open(URI)
