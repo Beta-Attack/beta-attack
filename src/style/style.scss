@@ -1,8 +1,9 @@
 /*********************
   Variables
 *********************/
-$primary-font: "Libre Franklin", sans-serif;
-$secondary-font: "Gudea", sans-serif;
+$primary-font: "Oxygen Bold", sans-serif;
+$secondary-font: "Oxygen Regular", sans-serif;
+$tertiary-font: "Source Code Pro", sans-serif;
 
 /*********************
   Mixins
@@ -23,48 +24,60 @@ $secondary-font: "Gudea", sans-serif;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+@font-face {
+  font-family: "Oxygen Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/Oxygen-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Oxygen Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/Oxygen-Bold.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Source Code Pro";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/SourceCodePro-Regular.ttf") format("ttf");
+}
 
 /*********************
   Border box
 *********************/
 html {
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+} 
+
+/*********************
+  Font
+*********************/
+body, input, button, p {
+  font-size: 1.0rem;
+  font-family: $secondary-font;
 }
-@font-face {
-  font-family: "Gudea";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/Gudea-Regular.ttf") format("ttf");
+h1, h2, h3 {
+  font-family: $primary-font;
 }
-@font-face {
-  font-family: "Libre Franklin";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/LibreFranklin-Medium.ttf") format("ttf");
+h1, h2 {
+  font-size: 1.125rem;
+}
+h3 {
+  font-size: 1rem;
 }
 
 /*********************
   General
 *********************/
 body {
-  font-family: $primary-font;
+  font-family: $tertiary-font;
   min-width: 800px;
   min-height: 600px;
-  width: 100%;
-  height: 100%;
-}
-#container, .main {
-  width: 100%;
-  height: 100%;
-}
-#container {
-  padding: 1%;
-  background-color: #A1A1A1;
+  background-color: #6D6D6D;
 }
 button {
   background-color: transparent;
@@ -73,78 +86,134 @@ button {
   background-color: #EEEEEE;
 }
 
-/*********************
-  Font
-*********************/
-body, input, button {
-  font-family: $primary-font;
-  font-size: 1.4rem;
-}
-p {
-  font-family: $secondary-font;
-}
-
-/*********************
-  Header 
-*********************/
-header {
-  position: relative;
-  height: 8%;
+body, html, #container, .app {
   width: 100%;
-  background-color: #CECECE;
-}
-nav {
-  @include center-center(relative);
-  display: inline-block;
+  height: 100%;
 }
 
 /*********************
-  Main
+  Sidebar & Main
+*********************/
+main, .sidebar {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+}
+
+/*********************
+  Sidebar
+*********************/
+.sidebar {
+  width: 10%;
+  background: url("../assets/sidebar.png");
+}
+.sidebar img {
+  width: 100%;
+  height: auto;
+}
+.sidebar button:first-of-type {
+  background-color: #5FADFC;
+}
+
+/*********************
+  Main // 1152 x 850
 *********************/
 main {
-  // position: relative;
-  height: 92%;
-  padding: 1% 0;
+  width: 90%;
+  background-color: #E9F4FF;
 }
-//Gutter for components in main element
+nav {
+  width: 100%;
+}
+nav button {
+  display: block;
+  margin: 0 auto;
+}
 
 /*********************
-  Pentest 
+  Pentest //
 *********************/
 .pentest {
-  height: 15%;
-  width: 100%;
-  background-color: #F7F7F7;
+  width: 96.4%;
+  height: 22%;
+  padding: 3%;
+  margin-top: 1.8%;
+  margin-left: 1.8%;
+  background-color: #F8FCFF;
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
 }
-.url-field {
+.pentest form {
   @include center-vertical(relative);
+  width: 100%;
 }
-.url-field input, .url-field button {
+.pentest h2 {
+  margin-bottom: 21px;
+}
+.pentest input, .pentest button {
   vertical-align: top;
+  height: 45px;
 }
-.url-field input, .url-field button {
-  height: 40px;
+.pentest input {
+  width: 80%;
+  padding-left: 1.5%;
+  margin-right: 5%;
 }
-.url-field button {
+.pentest button {
   width: 15%;
-  margin-left: 3.33%;
 }
-.url-field input {
-  width: 60%;
+
+/*********************
+  Status & Summary
+*********************/
+.status, .summary {
+  display: inline-block;
+  vertical-align: top;
+  height: 70.5%;
+  padding: 3%;
+  margin-top: 1.8%;
+  margin-left: 1.8%;
+}
+
+/*********************
+  Status //
+*********************/
+.status {
+  width: 23%;
+  background-color: #F8FCFF;
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
+}
+.status article {
+  width: 100%;
+  margin-top: 21px;
+}
+.status img {
+  width: 100%;
+  height: auto;
+}
+.status p {
+  margin-top: 14px;
+  text-align: center;
 }
 
 /*********************
   Summary 
 *********************/
 .summary {
-  background-color: #F7F7F7;
-  margin-top: 1%;
+  width: 71.6%;
+  background-color: #F8FCFF;
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
 }
-
-/*********************
-  XSS
-*********************/
-
-/*********************
-  SQL
-*********************/
+.summary article {
+  height: 45%;
+  margin-top: 21px;
+}
+.summary div {
+  height: 84%;
+  padding: 1.5%;
+  margin-top: 21px;
+  background-color: white;
+}
+.summary div p {
+  font-family: $tertiary-font;
+  font-size: 0.9rem;
+}
