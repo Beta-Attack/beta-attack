@@ -6,7 +6,6 @@ const xssInjection = {};
 xssInjection
   .targetFormInput = async function (script, url, inputs, idx = inputs.length - 1, result = []) {
     // Exit if no form detected
-    console.log('This is the url', url);
     if (inputs.length === 0) return 'No form found in the page.';
     // Base case for exiting recursion
     if (idx < 0) {
@@ -14,11 +13,9 @@ xssInjection
     }
     const xssScript = script;
     let inputsIndex = idx;
-    console.log('This is inputs: ', inputs);
     // Recursively fills input with all the xss scripts
     async function fillInput(s = xssScript.length - 1) {
       let index = s;
-      console.log('Injected script: ', xssScript[index]);
       if (index < 0) return;
       // Initia new user for phantomjs on every recursion
       const horseman = new Horseman();
@@ -50,7 +47,6 @@ xssInjection
     }
     await fillInput();
     inputsIndex -= 1;
-    console.log('This is url at the end: ', url);
     return this.targetFormInput(script, url, inputs, inputsIndex, result);
   };
 
