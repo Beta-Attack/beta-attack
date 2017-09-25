@@ -6,7 +6,6 @@ const request = require('request');
 const { JSDOM } = jsdom;
 
 const attack = {};
-attack.url = null;
 
 const getForm = url =>
   new Promise((resolve, reject) => {
