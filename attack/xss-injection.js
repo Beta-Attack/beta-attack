@@ -22,7 +22,6 @@ xssInjection
       await horseman
         .viewport(1024, 850)
         .on('consoleMessage', (msg) => {
-          console.log('******This is msg******', msg);
           result.push({
             script: xssScript[index],
             attribute: 'name',
