@@ -1,5 +1,4 @@
 const Horseman = require('node-horseman');
-const config = require('./config.js');
 
 const xssInjection = {};
 
