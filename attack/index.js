@@ -31,7 +31,6 @@ const getForm = url =>
 attack.injectFormInput = async (url) => {
   const result = [];
   const XSSScripts = xssScripts.scripts(url);
-  console.log('This is XSSScripts: ', XSSScripts);
   const inputFields = await getForm(url);
   async function traverseInputs(i = inputFields.length - 1) {
     let index = i;
