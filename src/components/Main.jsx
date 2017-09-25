@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pentest from './Pentest';
+import Status from './Status';
 import Summary from './Summary';
 
 const propTypes = {
@@ -9,19 +10,28 @@ const propTypes = {
   send: PropTypes.func.isRequired,
 };
 
-function Main(props) {
+const defaultProps = {
+  buttonName: 'Send',
+  click: () => {
+    console.log('clicked!!');
+  },
+};
+
+function Button(props) {
   return (
     <main>
       <Pentest
         url={props.url}
         handleURL={props.handleURL}
-        send={() => { props.send(); }}
+        send={props.send}
       />
+      <Status />
       <Summary />
     </main>
   );
 }
 
-Main.propTypes = propTypes;
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
 
-export default Main;
+export default Button;
