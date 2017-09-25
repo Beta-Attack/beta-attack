@@ -26,6 +26,8 @@ app.post('/attack', (req, res) => {
 });
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
+app.use('/dist/style/img', express.static(path.join(__dirname, '../dist/img')));
+app.use('/img', express.static(path.join(__dirname, '../dist/img')));
 
 const PORT = 4321;
 
