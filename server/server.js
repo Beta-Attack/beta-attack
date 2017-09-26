@@ -8,12 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  console.log('hello');
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.post('/attack', (req, res) => {
-  console.log('This is req.body', typeof req.body.url);
   let url = null;
   if (typeof req.body.url === 'string') url = req.body.url;
   else res.end('Invalid Input');
