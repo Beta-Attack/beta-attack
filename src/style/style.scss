@@ -75,7 +75,7 @@ h3 {
 *********************/
 body {
   font-family: $tertiary-font;
-  min-width: 800px;
+  min-width: 978px;
   min-height: 600px;
   background-color: #6D6D6D;
 }
@@ -89,6 +89,23 @@ button {
 body, html, #container, .app {
   width: 100%;
   height: 100%;
+}
+.load {
+  width: 60%;
+  height: 60%;
+  @include center-center(absolute);
+  background: url("../assets/load.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  opacity: 0.9;
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
+}
+.load p {
+  position: relative;
+  margin-top: 58%;
+  text-align: center;
+  color: #5FADFC;
 }
 
 /*********************
@@ -104,7 +121,7 @@ main, .sidebar {
   Sidebar
 *********************/
 .sidebar {
-  width: 10%;
+  width: 7%;
   background: url("../assets/sidebar.png");
 }
 .sidebar img {
@@ -114,20 +131,24 @@ main, .sidebar {
 .sidebar button:first-of-type {
   background-color: #5FADFC;
 }
-
+.sidebar button:last-of-type {
+  visibility: hidden;
+}
 /*********************
   Main // 1152 x 850
 *********************/
 main {
-  width: 90%;
+  width: 93%;
   background-color: #E9F4FF;
 }
 nav {
   width: 100%;
 }
 nav button {
+  color: white;
   display: block;
   margin: 0 auto;
+  padding-bottom: 12px;
 }
 
 /*********************
@@ -157,11 +178,21 @@ nav button {
   width: 80%;
   padding-left: 1.5%;
   margin-right: 5%;
+  border: 0.5px solid #BBBBBB;
 }
 .pentest button {
+  background-color: #5AA8FB;
+  color: white;
   width: 15%;
 }
-
+.pentest input:focus {
+  outline: none;
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
+  border: none;
+}
+.pentest button:hover {
+  box-shadow: 0 6px 20px 0 rgba(0, 50, 100, 0.25);
+}
 /*********************
   Status & Summary
 *********************/
@@ -216,4 +247,35 @@ nav button {
 .summary div p {
   font-family: $tertiary-font;
   font-size: 0.9rem;
+}
+
+/*********************
+  Result
+*********************/
+.result {
+  padding: 2%;
+  border: 0.5px solid #BBBBBB;
+  overflow: hidden;
+}
+.result li, .result span {
+  font-size: 0.8rem;
+}
+.result li {
+  margin-top: 12px;
+  margin-left: 12px;
+}
+.result li p:first-of-type {
+  margin-bottom: 6px;
+}
+.result span {
+  display: inline;
+}
+.scripts {
+  color: #BE1919;
+}
+.elementName {
+  color: #275A95;
+}
+.elementURL {
+  color: #940BA0;
 }

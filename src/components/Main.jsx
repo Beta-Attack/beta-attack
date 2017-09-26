@@ -8,6 +8,7 @@ const propTypes = {
   url: PropTypes.string.isRequired,
   handleURL: PropTypes.func.isRequired,
   send: PropTypes.func.isRequired,
+  xssMessage: PropTypes.array,
 };
 
 const defaultProps = {
@@ -15,9 +16,10 @@ const defaultProps = {
   click: () => {
     console.log('clicked!!');
   },
+  xssMessage: [],
 };
 
-function Button(props) {
+function Main(props) {
   return (
     <main>
       <Pentest
@@ -25,13 +27,13 @@ function Button(props) {
         handleURL={props.handleURL}
         send={props.send}
       />
-      <Status />
-      <Summary />
+      <Status xssMessage={props.xssMessage} />
+      <Summary xssMessage={props.xssMessage} />
     </main>
   );
 }
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+Main.propTypes = propTypes;
+Main.defaultProps = defaultProps;
 
-export default Button;
+export default Main;
