@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       url: '',
-      message: '',
+      xssMessage: [],
+      load: false,
     };
   }
   handleURL(e) {
@@ -20,19 +21,30 @@ class App extends Component {
     this.setState({ url: newUrl });
   }
   send() {
+    this.setState({ load: true });
     axios.post('/attack', { url: this.state.url })
       .then((response) => {
         console.log('This is the reponse: ', response);
+        this.setState({ xssMessage: response.data, load: false });
+        console.log('This is the state', this.state);
       });
   }
   render() {
     return (
       <section className="app">
+        {
+          this.state.load === true &&
+          <div className="load">
+            <p>Bot is working...</p>
+          </div>
+        }
         <Sidebar />
         <Main
           url={this.state.url}
           handleURL={(e) => { this.handleURL(e); }}
           send={() => { this.send(); }}
+
+          xssMessage={this.state.xssMessage}
         />
       </section>
     );

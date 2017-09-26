@@ -38,7 +38,7 @@ xssInjection
         // **** End ****
         .type(`input[name=${inputs[inputsIndex]}]`, xssScript[index])
         .keyboardEvent('keypress', 16777221)
-        .wait(500)
+        .wait(600)
         .close();
       index -= 1;
       return fillInput(index);
