@@ -8,7 +8,18 @@ const propTypes = {
   url: PropTypes.string.isRequired,
   handleURL: PropTypes.func.isRequired,
   send: PropTypes.func.isRequired,
-  xssMessage: PropTypes.array,
+  xssMessage: PropTypes.arrayOf(PropTypes.shape({
+    script: React.PropTypes.string.isRequired,
+    attribute: React.PropTypes.string.isRequired,
+    value: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+  })),
+  sqlMessage: PropTypes.arrayOf(PropTypes.shape({
+    script: React.PropTypes.string.isRequired,
+    attribute: React.PropTypes.string.isRequired,
+    value: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+  })),
 };
 
 const defaultProps = {
@@ -17,6 +28,7 @@ const defaultProps = {
     console.log('clicked!!');
   },
   xssMessage: [],
+  sqlMessage: [],
 };
 
 function Main(props) {
@@ -27,8 +39,14 @@ function Main(props) {
         handleURL={props.handleURL}
         send={props.send}
       />
-      <Status xssMessage={props.xssMessage} />
-      <Summary xssMessage={props.xssMessage} />
+      <Status
+        xssMessage={props.xssMessage}
+        sqlMessage={props.sqlMessage}
+      />
+      <Summary
+        xssMessage={props.xssMessage}
+        sqlMessage={props.sqlMessage}
+      />
     </main>
   );
 }
