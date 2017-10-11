@@ -1,5 +1,5 @@
 const xssScripts = {};
-xssScripts.scripts = url =>
+xssScripts.makeScripts = url =>
   [
     `<script\x20type="text/javascript">javascript:console.log(${JSON.stringify(url)});</script>`,
     `<script\x3Etype="text/javascript">javascript:console.log(${JSON.stringify(url)});</script>`,

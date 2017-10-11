@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
-const attack = require('../attack');
 const bodyParser = require('body-parser');
+const { fork } = require('child_process');
 
 const app = express();
 
@@ -15,12 +15,11 @@ app.post('/attack', (req, res) => {
   let url = null;
   if (typeof req.body.url === 'string') url = req.body.url;
   else res.end('Invalid Input');
-  attack
-    .injectFormInput(url)
-    .then((response) => {
-      console.log('response in server: ', response);
-      res.send(response);
-    });
+  const beginAttack = fork(path.join(__dirname, '../attack/attack.js'));
+  beginAttack.send(url);
+  beginAttack.on('message', (result) => {
+    res.send(result);
+  });
 });
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));

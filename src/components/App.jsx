@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       url: '',
       xssMessage: [],
+      sqlMessage: [],
       load: false,
     };
   }
@@ -24,9 +25,11 @@ class App extends Component {
     this.setState({ load: true });
     axios.post('/attack', { url: this.state.url })
       .then((response) => {
-        console.log('This is the reponse: ', response);
-        this.setState({ xssMessage: response.data, load: false });
-        console.log('This is the state', this.state);
+        this.setState({
+          xssMessage: response.data.xss,
+          sqlMessage: response.data.sql,
+          load: false,
+        });
       });
   }
   render() {
@@ -45,6 +48,7 @@ class App extends Component {
           send={() => { this.send(); }}
 
           xssMessage={this.state.xssMessage}
+          sqlMessage={this.state.sqlMessage}
         />
       </section>
     );

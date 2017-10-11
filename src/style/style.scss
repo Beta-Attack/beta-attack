@@ -255,7 +255,7 @@ nav button {
 .result {
   padding: 2%;
   border: 0.5px solid #BBBBBB;
-  overflow: hidden;
+  overflow: scroll;
 }
 .result li, .result span {
   font-size: 0.8rem;
@@ -278,4 +278,7 @@ nav button {
 }
 .elementURL {
   color: #940BA0;
+}
+.result .is-secure {
+  color: #61B3A6;
 }

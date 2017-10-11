@@ -3,47 +3,19 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  xssMessage: PropTypes.array,
+  className: PropTypes.string.isRequired,
+  result: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
 const defaultProps = {
-  xssMessage: [],
+  result: [],
 };
 
 function Result(props) {
-  let result = null;
-  if (props.xssMessage.length === 0) {
-    result = <p className="is-secure">Congratulations! You site is safe from most common XSS injections!</p>;
-  }
-  result = props.xssMessage.map((element, index) =>
-    (
-      <li key={index.toString()}>
-        <p>{index + 1}: </p>
-        <p>
-          Injected Script:
-          <span className="scripts">
-            {element.script}
-          </span>
-        </p>
-        <p>
-          Vulnerable element:
-          <span className="elementName">
-            &lt;input {element.attribute}=&quot;{element.value}&quot;&gt;
-          </span>
-        </p>
-        <p>
-          Vulnerable URL:
-          <span className="elementURL">
-            {element.url}
-          </span>
-        </p>
-      </li>
-    ),
-  );
   return (
     <article className="result-container">
       <h3>{props.name}</h3>
-      <div className="result">
-        <ul>{result}</ul>
+      <div className={props.className}>
+        <ul>{props.result}</ul>
       </div>
     </article>
   );

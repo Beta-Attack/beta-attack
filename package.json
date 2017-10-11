@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "electron": "^1.7.6",
     "express": "^4.15.4",
@@ -20,7 +21,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "request": "^2.82.0"
+    "request": "^2.82.0",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
