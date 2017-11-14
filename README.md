@@ -1,25 +1,42 @@
-# Beta-Attack
+# beta-attack
+![Beta-Attack Logo](./src/assets/logo.png)
+## What is this?
+An open-source desktop application that allows developers to check XSS and SQL injection vulnerabilities with one click.
 
-Beta-Attack is a pen testing desktop app that thorougly searches a developer's project for XSS and SQL injection vulnerabilities. 
-Test your application throughout your development life cycle and identify weaknesses in order to provide a secure experience for your users.
+![Beta-Attack intro image](./docs/1_intro.jpg)
 
-# Usage
-Paste a url of your project, click submit and watch your results return in seconds.
+Get the precise location of vulnerable fields.
 
-If any errors return, copy the link of the url from the results and identify your fields that are vulnerable.
+![Beta-Attack intro image](./docs/2_result.jpg)
 
-If no errors return, congratulations! You're app is secure of the most common XSS and SQL injection vulnerabilities.
+## How does this work?
+We traverse the DOM and extract input fields and urls with query strings, and we reserve them as attack targets. Then for every input field, we create multiple new PhantomJS isntances to inject standard XSS and SQL scripts, and see if they are sucessfully executed. Currently it only works for small and mid sized applications. If the application contains more than 50 urls, it will cause CPU overload, but we are working hard to figure out alternative ways to perform such test.
 
-# Why Beta-Attack?
+## How to install?
+For now, please clone the file and do either
+```
+npm install
+```
+```
+npm run build
+```
+```
+npm run app
+```
+or
+```
+yarn install
+```
+```
+yarn build
+```
+```
+yarn app
+```
+For now, it can take live web applications. However, it's intended to work on local server.
 
-We built Beta-Attack to let developers test their applications from the beginning of the development process, rather until the end.
-Although there are many pen testing tools available, none give developers an easier user experience. 
+## Contributing
+Will accept pull request if it's reasonable.
 
-We wanted Beta-Attack to be simple to use, and avoid submission of fatal payloads that can damage the integrity and accessibility of your app.
-
-# Contributing
-
-Found a bug? Have a suggestion?
-
-To contribute to Beta-Attack, fork the repository and clone it to your machine then install dependencies with npm install and npm run build. 
-If you're interested in joining the Beta-Attack team as a contributor, feel free to message us directly!
+## License
+MIT
